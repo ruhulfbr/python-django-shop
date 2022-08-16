@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="card-title ml-2 mt-2 mb-3">{{page_title}}</h5>
+                </div>
+
+                    <form method="post" action="" autocomplete="off">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                          <div class="form-group m-t-20 {% if field.errors %} invalid{% endif %}">
+                            <label for="{{ field.id_for_label }}">{{ field.label }} <small class="text-danger">*</small> </label>
+                            {{ field }}
+                            {% for error in field.errors %}
+                              <p class="help-block">{{ error }}</p>
+                            {% endfor %}
+                          </div>
+                        {% endfor %}
+
+                        <div class="form-group m-t-20">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <a href="{% url 'products' %}" class="btn btn-danger">Cancel</a>
+                        </div>
+
+                    </form>
+
+
+
+
+
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock  %}
